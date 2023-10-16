@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.51.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.3"
+  },
+  "scripts": {
+    "css:build": "npx tailwind build -c ./wwwroot/js/tailwind.js -i ./wwwroot/css/site.css -o ./wwwroot/css/output.css"
+  },
+  "keywords": [],
+  "author": "Filipe Brito",
+  "license": "ISC"
+}
