@@ -1,0 +1,24 @@
+# Ignore all files in the bin and obj directories
+**/bin/**
+**/obj/**
+
+# Ignore the node_modules directory
+node_modules/
+
+# Ignore the dist directory (if you're using a build tool like webpack)
+dist/
+
+# Ignore the .vscode directory (if you're using Visual Studio Code)
+.vscode/
+
+# Ignore the .idea directory (if you're using IntelliJ IDEA)
+.idea/
+
+# Ignore the .DS_Store file (if you're on a Mac)
+.DS_Store
+
+# Ignore the .cache directory (if you're using Tailwind CSS)
+.cache/
+
+# Ignore .min.js files
+*.min.js
