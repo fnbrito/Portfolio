@@ -9,19 +9,17 @@
     <meta name="author" content="Filipe Brito"/>
     <meta name="description" content="This is Filipe Brito's portfolio showcasing his abillities as a Full Stack Software Developer" />
     <meta name="keywords" content="software developer, portfolio, software engineer, filipe brito, resume" />
-    @*<link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />*@
-    <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
-    @*<link rel="stylesheet" href="~/Index.styles.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="@Url.Content("~/css/site.css")" asp-append-version="true" />
 </head>
 
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<body class="flex flex-col bg-gray-100 h-screen">
     <header>
         <nav id="header" class="fixed w-full z-10 top-0">
             <div id="progress" class="h-1 z-20 top-0" style="background:linear-gradient(to right, #4dc0b5 var(--scroll), transparent 0);"></div>
 
             <div class="w-full md:max-w-4xl mx-auto flex flex-wrap items-center justify-between mt-0 py-3">
                 <div class="pl-4">
-                    <a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold text-xl" href="#">
+                    <a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold text-xl" href="/">
                         Filipe Brito
                     </a>
                 </div>
@@ -33,11 +31,6 @@
                         </svg>
                     </button>
                 </div>
-
-@*                <button class="navbar-toggler col-1" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>*@
                 
                 <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-gray-100 md:bg-transparent z-20" id="nav-content">
                     <ul class="list-reset lg:flex justify-end flex-1 items-center">
@@ -51,23 +44,22 @@
                             <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" asp-area="" asp-page="/Projects">.projects()</a>
                         </li>
                         <li class="mr-3">
-                            <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" asp-area="" asp-page="/Contact">.contact()</a>
+                            <a class="contact inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" asp-area="" asp-page="/Contact">.contact()</a>
                         </li>
                     </ul>
                 </div>
-              @*<div class="col-1 navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                </div>*@
+
             </div>
         </nav>
     </header>
 
-    <div class="container w-full md:max-w-3xl mx-auto pt-20">
+    <div class="container w-full md:max-w-3xl mx-auto h-full">
         <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="bg-white border-t border-gray-400 shadow">
+    @* <footer class="bg-white border-t border-gray-400 shadow mt-2">
         <div class="container max-w-4xl mx-auto flex py-8">
 
             <div class="w-full mx-auto flex flex-wrap">
@@ -76,22 +68,11 @@
                     <p>&copy; @DateTime.Now.Year - Filipe Brito - <a asp-area="" asp-page="/Index">Home</a></p>
                 </div>
             </div>
-
-
         </div>
-    </footer>
-
-@*    <footer class="footer text-muted">
-        <div class="container-fluid">
-            &copy; @DateTime.Now.Year - Filipe Brito - <a asp-area="" asp-page="/Index">Home</a>
-        </div>
-    </footer>*@
+    </footer> *@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
-
-    @await RenderSectionAsync("Scripts", required: false)
 
     <script>
         /* Progress bar */
@@ -136,6 +117,8 @@
             document.getElementById("nav-content").classList.toggle("hidden");
         }
     </script>
+ 
+    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>
