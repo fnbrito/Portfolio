@@ -1,10 +1,11 @@
-﻿(function () {
+(function () {
   const safeToAnimate = window.matchMedia(
     "(prefers-reduced-motion: no-preference)",
   ).matches;
   if (!safeToAnimate) return;
 
-  // Get the eqlements that we need
+
+  // Get the elements that we need
   const dom = {
     face: document.querySelector(".face"),
     mark: document.querySelector(".mark"),
@@ -85,13 +86,41 @@
     storedXPosition = xPosition;
     storedYPosition = yPosition;
   }
+
   // gsap's RAF, falls back to set timeout
   gsap.ticker.add(moveSVG);
+
+  const blink = gsap.timeline({
+    repeat: -1,
+    repeatDelay: .1,
+    yoyo: true
+  });
+
+  blink
+    .to(".open-eyes", {
+      opacity: 0, duration: 0
+    }, 5)
 
   // updating the mouse coordinates
   function updateMouseCoords(event) {
     xPosition = mapWidth(event.clientX);
     yPosition = mapHeight(event.clientY);
   }
+
   window.addEventListener("mousemove", updateMouseCoords);
+
+  $(".contact").mouseenter(function () {
+      clearTimeout($(this).data('timeout')); {
+          gsap.to(".open-mouth", { opacity: 1, duration: 0 });
+          gsap.to(".sparkle", { opacity: 1, duration: 0 });
+          blink.pause();
+      }  
+  }).mouseleave(function () {
+      $(this).data('timeout', setTimeout(function () {
+          gsap.to(".open-mouth", { opacity: 0, duration: 0 });
+          gsap.to(".sparkle", { opacity: 0, duration: 0 });
+          blink.resume();
+      }, 300)); 
+  });
+
 })();
