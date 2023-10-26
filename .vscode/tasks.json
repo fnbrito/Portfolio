@@ -1,41 +1,83 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "build",
-			"command": "dotnet",
-			"type": "process",
-			"args": [
-				"build",
-				"${workspaceFolder}/Portfolio.sln",
-				"/property:GenerateFullPaths=true",
-				"/consoleloggerparameters:NoSummary;ForceNoAlign"
-			],
-			"problemMatcher": "$msCompile"
-		},
-		{
-			"label": "publish",
-			"command": "dotnet",
-			"type": "process",
-			"args": [
-				"publish",
-				"${workspaceFolder}/Portfolio.sln",
-				"/property:GenerateFullPaths=true",
-				"/consoleloggerparameters:NoSummary;ForceNoAlign"
-			],
-			"problemMatcher": "$msCompile"
-		},
-		{
-			"label": "watch",
-			"command": "dotnet",
-			"type": "process",
-			"args": [
-				"watch",
-				"run",
-				"--project",
-				"${workspaceFolder}/Portfolio.sln"
-			],
-			"problemMatcher": "$msCompile"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/Portfolio.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary;ForceNoAlign"
+      ],
+      "problemMatcher": "$msCompile",
+      "dependsOn": ["tailwindcss"]
+    },
+    {
+      "label": "publish",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "publish",
+        "${workspaceFolder}/Portfolio.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary;ForceNoAlign"
+      ],
+      "problemMatcher": "$msCompile",
+      "dependsOn": ["tailwindcss"]
+    },
+    {
+      "label": "watch",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "watch",
+        "run",
+        "--project",
+        "${workspaceFolder}/Portfolio/Portfolio.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary;ForceNoAlign"
+      ],
+      "problemMatcher": "$msCompile",
+      "dependsOn": ["tailwindcss"]
+    },
+    {
+      "label": "tailwindcss",
+      "command": "npx",
+      "type": "shell",
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": [
+          {
+            "regexp": "^CssSyntaxError: tailwindcss: (.*):(\\d+):(\\d+): (.+)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "message": 4
+          }
+        ],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^Rebuilding.*$",
+          "endsPattern": "^Done in .*$"
+        }
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/Portfolio"
+      },
+      "args": [
+        "tailwindcss",
+        "build",
+        "-c",
+        "tailwind.config.js",
+        "-i",
+        "./wwwroot/css/style.css",
+        "-o",
+        "./wwwroot/css/site.css",
+        "--verbose",
+        "--watch"
+      ]
+    }
+  ]
 }
