@@ -33,6 +33,7 @@
       mapHeight = gsap.utils.mapRange(0, innerHeight, -50, 50);
     }
     window.addEventListener("resize", setMaps);
+    
     setMaps();
   
     function moveSVG() {
@@ -89,39 +90,76 @@
   
     // gsap's RAF, falls back to set timeout
     gsap.ticker.add(moveSVG);
-  
-    const blink = gsap.timeline({
-      repeat: -1,
-      repeatDelay: .1,
-      yoyo: true
-    });
-  
-    blink
-      .to(".open-eyes", {
-        opacity: 0, duration: 0
-      }, 5)
-  
     // updating the mouse coordinates
     function updateMouseCoords(event) {
       xPosition = mapWidth(event.clientX);
       yPosition = mapHeight(event.clientY);
     }
-  
+    
     window.addEventListener("mousemove", updateMouseCoords);
-  
-    $(".contact").mouseenter(function () {
-        clearTimeout($(this).data('timeout')); {
-            gsap.to(".open-mouth", { opacity: 1, duration: 0 });
-            gsap.to(".sparkle", { opacity: 1, duration: 0 });
-            blink.pause();
-        }  
-    }).mouseleave(function () {
-        $(this).data('timeout', setTimeout(function () {
-            gsap.to(".open-mouth", { opacity: 0, duration: 0 });
-            gsap.to(".sparkle", { opacity: 0, duration: 0 });
-            blink.resume();
-        }, 300)); 
-    });
+    
+    
+    
+    const blink = gsap.timeline({
+      repeat: -1,
+      repeatDelay: .1,
+      yoyo: true
+    })
+    .to(".open-eyes", {
+      opacity: 0, duration: 0
+    }, 5);
+    
+    const smile = gsap.timeline({
+      defaults: {
+        duration: 0
+      }
+    })
+    .paused(true)
+    .reversed(true)
+    .from(".open-mouth, .sparkle", {
+      opacity: 0,
+    })
+    .to(".open-mouth, .sparkle", {
+      opacity: 1,
+    })
+    .to({}, {duration: 0.5});
+
+    function isBigScreen() {
+      return window.innerWidth >= 767;
+    }
+
+    // create the smile animation hook
+    function handleSmileEvents() {
+      if(isBigScreen()) {
+        $(".smile").mouseenter(function() {
+            // clearTimeout($(this).data('timeout'));
+            // {
+                // gsap.to(".open-mouth, .sparkle", {opacity: 1, duration: 0});
+                smile.play();
+                blink.pause();
+            // }
+        }).mouseleave(function() {
+            // $(this).data('timeout', setTimeout(function() {
+                // gsap.to(".open-mouth, .sparkle", {opacity: 0, duration: 0});
+                smile.reverse();
+                blink.resume();
+                // gsap.delayedCall(.5, blink.resume());
+            // }, 300));
+        });
+      }
+      else {
+        $("#nav-toggle").on('click', () => {
+          // console.log(smile.reversed());
+          // smile.reversed(!smile.reversed());
+          smile.reversed() ? blink.resume() : blink.pause();
+          smile.reversed() ? smile.play() : smile.reverse();
+          // smile.reversed(!smile.reversed());
+        });
+      }
+    }
+    
+    $(window).on("windowWidthChanged", handleSmileEvents);
+    handleSmileEvents();
   
   })();
   
