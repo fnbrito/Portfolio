@@ -7,44 +7,48 @@
     @*<meta http-equiv="X-UA-Compatible" content="ie=edge"/>*@
     <title>@ViewData["Title"] - Index</title>
     <meta name="author" content="Filipe Brito"/>
-    <meta name="description" content="Portfolio showcasing Filipe Brito's abillities as a Full Stack Software Developer" />
+    <meta name="description" content="Portfolio showcasing Filipe Brito's abilities as a Full Stack Software Developer" />
     <meta name="keywords" content="software developer, portfolio, software engineer, filipe brito, resume" />
     <link rel="stylesheet" href="@Url.Content("~/css/site.css")" asp-append-version="true" />
 </head>
 
-<body class="flex flex-col bg-gray-400 h-screen">
-    <header>
-        <nav id="header" class="fixed w-full z-10 top-0">
-            <div id="progress" class="h-1 z-20 top-0" style="background:linear-gradient(to right, #4dc0b5 var(--scroll), transparent 0);"></div>
+<body id="test" class="flex flex-col bg-primary-50 h-screen w-screen m-0 p-0">
+    @* Header *@
+    <header class="">
+        <nav id="header" class="transform transition-all w-full z-10 h-16 top-0 md:px-4">
+            <div id="progress" class="h-1 z-20 top-0" style="background:linear-gradient(to right, #000000 var(--scroll), transparent 0);"></div>
 
-            <div class="w-full md:max-w-4xl mx-auto flex flex-wrap items-center justify-between mt-0 py-3">
-                <div class="pl-4">
-                    <a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold" href="/">
+            <div class="w-full md:max-w-4xl mx-auto px-8 flex flex-wrap items-center justify-between mt-0 py-3">
+                @* Home link *@
+                <div id="home" class="">
+                    <a class="transition ease-in duration-200 text-gray-900 hover:text-primary text-base no-underline hover:no-underline font-bold" href="/">
                         Filipe Brito
                     </a>
                 </div>
 
-                <div class="bg-green-100 block lg:hidden pr-4">
-                    <button id="nav-toggle" type="button" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-green-500 appearance-none focus:outline-none">
-                        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                @* Hamburger icon *@
+                <div id="hamburger" class="bg-transparent block md:hidden">
+                    <button id="nav-toggle" type="button" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-primary hover:border-primary hover:fill-primary hover:bg-primary-50 transition ease-in duration-200 appearance-none focus:outline-none">
+                        <svg class="h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
                         </svg>
                     </button>
                 </div>
-                
-                <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-yellow-900 md:bg-transparent z-20" id="nav-content">
-                    <ul class="list-reset lg:flex justify-end flex-1 items-center">
+
+                @* Links *@
+                <div id="nav-content" class="transition -translate-y-60 md:translate-y-0 w-full flex-grow z-20 md:bg-transparent md:flex md:items-center md:w-auto mt-2 md:mt-0 bg-grey-200">
+                    <ul class="list-none md:flex justify-end flex-1 items-center">
                         <li class="mr-3">
-                            <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" asp-area="" asp-page="/About">.about()</a>
+                            <a class="inline-block text-gray-600 no-underline hover:text-black hover:text-underline py-2 px-4" asp-area="" asp-page="/About">.about()</a>
                         </li>
                         <li class="mr-3">
-                            <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" asp-area="" asp-page="/Experience">.experience()</a>
+                            <a class="inline-block text-gray-600 no-underline hover:text-black hover:text-underline py-2 px-4" asp-area="" asp-page="/Experience">.experience()</a>
                         </li>
                         <li class="mr-3">
-                            <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" asp-area="" asp-page="/Projects">.projects()</a>
+                            <a class="inline-block text-gray-600 no-underline hover:text-black hover:text-underline py-2 px-4" asp-area="" asp-page="/Projects">.projects()</a>
                         </li>
                         <li class="mr-3">
-                            <a class="contact inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" asp-area="" asp-page="/Contact">.contact()</a>
+                            <a class="smile inline-block text-gray-600 no-underline hover:text-black hover:text-underline py-2 px-4" asp-area="" asp-page="/Contact">.contact()</a>
                         </li>
                     </ul>
                 </div>
@@ -53,29 +57,28 @@
         </nav>
     </header>
 
-    <div class="w-full md:max-w-3xl mx-auto h-full border border-black mt-20">
+    @* Main *@
+    <div class="w-full md:max-w-3xl mx-auto h-full">
         <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    @* <footer class="bg-white border-t border-gray-400 shadow mt-2">
-        <div class="container max-w-4xl mx-auto flex py-8">
-
-            <div class="w-full mx-auto flex flex-wrap">
-
-                <div class="flex w-full md:w-1/2">
-                    <p>&copy; @DateTime.Now.Year - Filipe Brito - <a asp-area="" asp-page="/Index">Home</a></p>
-                </div>
+    @* Footer *@
+    <footer class="bg-white border-t border-gray-400 shadow mt-2">
+        <div class="max-w-4xl flex py-4 px-8 lg:mx-auto">
+            <div>
+                <p>&copy; @DateTime.Now.Year - Filipe Brito - <a asp-area="" asp-page="/Index">Home</a></p>
             </div>
         </div>
-    </footer> *@
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     <script>
-        /* Progress bar */
+
+        @* /* Progress bar */
         //Source: https://alligator.io/js/progress-bar-javascript-css-variables/
         var h = document.documentElement,
             b = document.body,
@@ -109,13 +112,33 @@
 
             }
 
-        });
+        }); *@
 
 
         //Javascript to toggle the menu
         document.getElementById('nav-toggle').onclick = function () {
-            document.getElementById("nav-content").classList.toggle("hidden");
+            document.getElementById("nav-content").classList.toggle("-translate-y-60");
+            document.getElementById("header").classList.toggle("h-56");
         }
+
+        var isBig = window.innerWidth >= 768;
+        function checkScreenSize() {
+            if (window.innerWidth > 767 && !isBig) {
+                document.getElementById("nav-content").classList.remove("-translate-y-60");
+                document.getElementById("header").classList.remove("h-56");
+                $(window).trigger('windowWidthChanged');
+                isBig = true;
+            } if (window.innerWidth < 767 && isBig) {
+                document.getElementById("nav-content").classList.add("hidden");
+                document.getElementById("nav-content").classList.add("-translate-y-60");
+                document.getElementById("nav-content").classList.remove("hidden");
+                $(window).trigger('windowWidthChanged');
+                isBig = false;
+            }
+        }
+
+        window.addEventListener("resize", checkScreenSize);
+
     </script>
  
     @await RenderSectionAsync("Scripts", required: false)
