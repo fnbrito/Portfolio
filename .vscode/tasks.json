@@ -33,11 +33,8 @@
       "type": "process",
       "args": [
         "watch",
-        "run",
         "--project",
-        "${workspaceFolder}/Portfolio/Portfolio.csproj",
-        "/property:GenerateFullPaths=true",
-        "/consoleloggerparameters:NoSummary;ForceNoAlign"
+        "${workspaceFolder}/Portfolio/Portfolio.csproj"
       ],
       "problemMatcher": "$msCompile",
       "dependsOn": ["tailwindcss"]
