@@ -12,19 +12,16 @@
     <link rel="stylesheet" href="@Url.Content("~/css/site.css")" asp-append-version="true" />
 </head>
 
-<body id="test" class="flex flex-col bg-primary-50 h-screen w-screen m-0 p-0">
+<body class="flex flex-col bg-primary-50 min-h-screen m-0 p-0"> @* overflow-hidden*@
     @* Header *@
-    <header class="">
-        <nav id="header" class="transform transition-all w-full z-10 h-16 top-0 md:px-4">
-            <div id="progress" class="h-1 z-20 top-0" style="background:linear-gradient(to right, #000000 var(--scroll), transparent 0);"></div>
-
-            <div class="w-full md:max-w-4xl mx-auto px-8 flex flex-wrap items-center justify-between mt-0 py-3">
+    <header class="z-0">
+        <nav id="header" class="w-full h-16 md:px-8">
+            @* <div id="progress" class="h-1 z-20 top-0" style="background:linear-gradient(to right, #000000 var(--scroll), transparent 0);"></div> *@
+            <div class="w-full md:max-w-4xl mx-auto px-8 py-4 flex flex-wrap justify-between place-content-center place-items-center">
                 @* Home link *@
-                <div id="home" class="">
-                    <a class="transition ease-in duration-200 text-gray-900 hover:text-primary text-base no-underline hover:no-underline font-bold" href="/">
-                        Filipe Brito
-                    </a>
-                </div>
+                <a class="text-3xl translate-y-0.5 md:translate-y-0 md:self-center transition ease-in duration-200 font-[Gratina] text-gray-900 hover:text-primary no-underline hover:no-underline" href="/">
+                    Filipe Brito
+                </a>
 
                 @* Hamburger icon *@
                 <div id="hamburger" class="bg-transparent block md:hidden">
@@ -58,26 +55,22 @@
     </header>
 
     @* Main *@
-    <div class="w-full md:max-w-3xl mx-auto h-full">
-        <main role="main">
-            @RenderBody()
-        </main>
-    </div>
+    <main class="flex-1 flex flex-col z-0" role="main">
+        @RenderBody()
+    </main>
 
     @* Footer *@
-    <footer class="bg-white border-t border-gray-400 shadow mt-2">
-        <div class="max-w-4xl flex py-4 px-8 lg:mx-auto">
+    <footer class="bg-transparent h-10 border-t border-gray-400 z-10">
+        <div class="max-w-4xl py-2 px-8 box-border">
             <div>
-                <p>&copy; @DateTime.Now.Year - Filipe Brito - <a asp-area="" asp-page="/Index">Home</a></p>
+                <p>&copy; @DateTime.Now.Year - <a asp-area="" asp-page="/Index">Filipe Brito</a></p>
             </div>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     <script>
-
         @* /* Progress bar */
         //Source: https://alligator.io/js/progress-bar-javascript-css-variables/
         var h = document.documentElement,
@@ -115,17 +108,20 @@
         }); *@
 
 
-        //Javascript to toggle the menu
-        document.getElementById('nav-toggle').onclick = function () {
+        function toggleMenu() {
             document.getElementById("nav-content").classList.toggle("-translate-y-60");
             document.getElementById("header").classList.toggle("h-56");
         }
+
+        //Javascript to toggle the menu
+        document.getElementById('nav-toggle').onclick = toggleMenu; 
 
         var isBig = window.innerWidth >= 768;
         function checkScreenSize() {
             if (window.innerWidth > 767 && !isBig) {
                 document.getElementById("nav-content").classList.remove("-translate-y-60");
                 document.getElementById("header").classList.remove("h-56");
+                document.getElementById("nav-content").classList.add("hidden");
                 $(window).trigger('windowWidthChanged');
                 isBig = true;
             } if (window.innerWidth < 767 && isBig) {

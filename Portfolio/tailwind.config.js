@@ -6,6 +6,13 @@ module.exports = {
      './Views/**/*.cshtml'
 ],
   theme: {
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     extend: {
       colors: {
         'primary': {
@@ -50,6 +57,9 @@ module.exports = {
           900: '#724211',
           950: '#432205',
         }
+      },
+      fontSize: {
+        '10xl': '8.5rem',
       }
     },
   },
