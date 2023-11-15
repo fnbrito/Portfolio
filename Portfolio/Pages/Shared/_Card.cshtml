@@ -1,0 +1,27 @@
+﻿@model Portfolio.Shared.Models.Experience
+
+<div class="max-w-xs rounded-md overflow-hidden shadow-lg m-2 p-2 hover:bg-gray-100 hover:shadow-2xl">
+    <img class="w-full p-4" src="@Url.Content("~/images/" + @Model.ImageUrl)" alt="@Model.ImageDescription" />
+    <div class="px-6 py-4">
+        <div>
+            <h2 class="text-xl font-bold mb-1">@Model.Title</h2>
+            <h3 class="text-gray-700 text-base">@@ @Model.Place</h3>
+        </div>
+    </div>
+    <div class="experience-tags px-4 pt-1 pb-2">
+        @foreach (var tag in Model.Tags)
+        {
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">@tag</span>
+        }
+    </div>
+
+    <div class="more p-2 hidden">
+        <h4 class="text-md">@Model.Description</h4>
+        <ul class="text-sm list-disc list-inside self-stretch">
+            @foreach (var point in Model.BulletPoints)
+            {
+                <li>@point</li>
+            }
+        </ul>
+    </div>
+</div>

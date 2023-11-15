@@ -1,0 +1,31 @@
+﻿@page
+@model ExperienceModel
+@{
+    ViewData["Title"] = "Experience";
+}
+
+<div id="wrapper" class="w-full">
+    
+    <h1 class="text-2xl font-bold m-2 text-center md:text-left">Work Experience</h1>
+
+    <div class="flex flex-wrap w-full justify-center sm:justify-normal">
+        
+        @foreach (var job in Model.Jobs)
+        {
+            <partial name="_Card" model="@job"/>
+        }
+
+    </div>
+
+    <h1 class="text-2xl font-bold m-2 text-center md:text-left">Education</h1>
+
+    <div class="flex flex-wrap w-full justify-center sm:justify-normal">
+
+        @foreach (var program in Model.Education)
+        {
+            <partial name="_Card" model="@program"/>
+        }
+
+    </div>
+
+</div>
