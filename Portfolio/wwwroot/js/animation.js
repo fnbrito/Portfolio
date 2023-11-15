@@ -4,19 +4,18 @@
     ).matches;
     if (!safeToAnimate) return;
   
-  
     // Get the elements that we need
     const dom = {
-      face: document.querySelector(".face"),
-      mark: document.querySelector(".mark"),
-      eye: document.querySelectorAll(".eyes"),
-      innerFace: document.querySelector(".inner-face"),
-      hairFront: document.querySelector(".hair-front"),
-      hairBack: document.querySelectorAll(".hair-under"),
-      ear: document.querySelectorAll(".ears"),
-      eyebrowLeft: document.querySelector(".eyebrow-left"),
-      eyebrowRight: document.querySelector(".eyebrow-right"),
-      shadow: document.querySelector(".shadow"),
+      face: document.querySelector("#face"),
+      mark: document.querySelector("#mark"),
+      eye: document.querySelectorAll("#eyes"),
+      innerFace: document.querySelector("#inner-face"),
+      hairFront: document.querySelector("#hair-front"),
+      hairBack: document.querySelectorAll("#hair-under"),
+      ear: document.querySelectorAll("#ears"),
+      eyebrowLeft: document.querySelector("#eyebrow-left"),
+      eyebrowRight: document.querySelector("#eyebrow-right"),
+      shadow: document.querySelector("#shadow"),
     };
   
     let xPosition;
@@ -41,12 +40,6 @@
       if (storedXPosition === xPosition && storedYPosition === yPosition) return;
       x = xPosition;
       y = yPosition;
-  
-      // if (xPosition && yPosition) {
-      // dom.screenlog.innerHTML = `
-      // <p> x: ${Math.round(x)}</p>
-      // <p> y: ${Math.round(y)} </p>`;
-      // }
   
       gsap.to(dom.face, {
         yPercent: y / 30,
@@ -98,31 +91,49 @@
     
     window.addEventListener("mousemove", updateMouseCoords);
     
-    
-    
     const blink = gsap.timeline({
       repeat: -1,
       repeatDelay: .1,
-      yoyo: true
-    })
-    .to(".open-eyes", {
-      opacity: 0, duration: 0
-    }, 5);
+      yoyo: true})
+      .to("#open-eyes", {
+        opacity: 0, duration: 0
+      }, 5);
     
     const smile = gsap.timeline({
       defaults: {
         duration: 0
-      }
-    })
-    .paused(true)
-    .reversed(true)
-    .from(".open-mouth, .sparkle", {
-      opacity: 0,
-    })
-    .to(".open-mouth, .sparkle", {
-      opacity: 1,
-    })
-    .to({}, {duration: 0.5});
+      }})
+      .paused(true)
+      .reversed(true)
+      .from("#open-mouth, #sparkle, #teeth-color", {
+      opacity: 0 })
+      .to("#open-mouth, #sparkle, #teeth-color", {
+      opacity: 1 })
+      .to({}, {duration: 0.5});
+
+    // const background = gsap.timeline({
+    //   defaults: {
+    //     repeat: -1,
+    //     delay: 0,
+    //     duration: 20,
+    //     ease: "none"
+    //   }})
+    //   .paused(true) // remove this to start
+    //   .to("#bg-clip", {
+    //     transformOrigin: "50% 50%",
+    //     rotate: 180});
+
+    // const backgroundGradient = gsap.timeline({
+    //   defaults: {
+    //     repeat: -1,
+    //     delay: 0,
+    //     duration: 5,
+    //     ease: "none"
+    //   }})
+    //   .to("#bg-gradient", {
+    //     cx: 1024,
+    //     cy: 768,
+    //     r: 45});
 
     function isBigScreen() {
       return window.innerWidth >= 767;
@@ -132,34 +143,49 @@
     function handleSmileEvents() {
       if(isBigScreen()) {
         $(".smile").mouseenter(function() {
-            // clearTimeout($(this).data('timeout'));
-            // {
-                // gsap.to(".open-mouth, .sparkle", {opacity: 1, duration: 0});
                 smile.play();
                 blink.pause();
-            // }
         }).mouseleave(function() {
-            // $(this).data('timeout', setTimeout(function() {
-                // gsap.to(".open-mouth, .sparkle", {opacity: 0, duration: 0});
                 smile.reverse();
                 blink.resume();
-                // gsap.delayedCall(.5, blink.resume());
-            // }, 300));
         });
       }
       else {
         $("#nav-toggle").on('click', () => {
-          // console.log(smile.reversed());
-          // smile.reversed(!smile.reversed());
-          smile.reversed() ? blink.resume() : blink.pause();
+          smile.reversed() ? blink.pause() : blink.resume();
           smile.reversed() ? smile.play() : smile.reverse();
-          // smile.reversed(!smile.reversed());
         });
       }
+    }
+
+    function handleEyebrowEvents() {
+      $(".title")
+        .mouseenter(() => {
+          console.log(xPosition);
+          if (xPosition < 0) {
+            gsap.to(dom.eyebrowRight, {
+              y: -2,
+              transformOrigin: "100% 0%",
+              rotate: 10
+          });
+          } else {
+            gsap.to(dom.eyebrowLeft, {
+              y: -2,
+              transformOrigin: "0% 0%",
+              rotate: -10
+          });
+        }})
+        .mouseleave(() => {
+          gsap.to([dom.eyebrowLeft, dom.eyebrowRight], {
+            y: 0,
+            rotate: 0
+        },);
+      })
     }
     
     $(window).on("windowWidthChanged", handleSmileEvents);
     handleSmileEvents();
+    handleEyebrowEvents();
   
   })();
   
