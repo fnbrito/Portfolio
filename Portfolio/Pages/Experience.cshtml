@@ -4,28 +4,29 @@
     ViewData["Title"] = "Experience";
 }
 
-<div id="wrapper" class="w-full">
-    
-    <h1 class="text-2xl font-bold m-2 text-center md:text-left">Work Experience</h1>
-
-    <div class="flex flex-wrap w-full justify-center sm:justify-normal">
-        
-        @foreach (var job in Model.Jobs)
-        {
-            <partial name="_Card" model="@job"/>
-        }
-
+<div class="flex-1 flex m-10">
+    <div class="flex-auto flex gap-4 m-10 justify-center">
+        <div class="">
+            <h1 class="text-2xl font-bold border-b-4 border-black ">Work Experience</h1>
+            <div class="flex flex-wrap justify-center sm:justify-normal">
+                @foreach (var job in Model.Jobs)
+                {
+                    <partial name="_Card" model="@job"/>
+                }
+            </div>
+        </div>
+        <div class="">
+            <h1 class=" text-2xl font-bold border-b-4 border-black">Education</h1>
+            <div class="flex flex-wrap justify-center sm:justify-normal">
+                @foreach (var program in Model.Education)
+                {
+                    <partial name="_Card" model="@program"/>
+                }
+            </div>
+        </div>
     </div>
 
-    <h1 class="text-2xl font-bold m-2 text-center md:text-left">Education</h1>
-
-    <div class="flex flex-wrap w-full justify-center sm:justify-normal">
-
-        @foreach (var program in Model.Education)
-        {
-            <partial name="_Card" model="@program"/>
-        }
-
-    </div>
-
+    @* <div class="flex-1 h-full self-center hidden lg:block">
+        <partial name="_Filipe"/>
+    </div> *@
 </div>

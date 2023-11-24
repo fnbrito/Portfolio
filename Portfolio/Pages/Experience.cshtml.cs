@@ -14,7 +14,9 @@ public class ExperienceModel : PageModel
     {
         Jobs.Add(new Experience{
             Place = "Brock Solutions",
-            Title = "Software Developer",
+            Title = "Software Developer (Co-op)",
+            StartDate = new DateTime(2021, 1, 1),
+            EndDate = new DateTime(2021, 8, 30),
             Description = "Started as DevOps CI/CD deploying solutions on-premises and remotely, moved to an agile development team working on a high-scale cloud-based SaaS product.",
             Tags = new string[] {
                 "c#", "mssql", "dotnet"
@@ -33,7 +35,9 @@ public class ExperienceModel : PageModel
         });
         Jobs.Add(new Experience{
             Place = "Dare Foods",
-            Title = "Business Developer and Support",
+            Title = "Business Developer (Co-op)",
+            StartDate = new DateTime(2021, 5, 1),
+            EndDate = new DateTime(2021, 12, 31),
             Description = "Developing PowerShell and Python scripts to enable and upgrade business processes. Collaborated with cross-functional teams, integrating APIs, working with legacy code; understanding, renewing, and improving them.",
             Tags = new string[] {
                 "powershell", "restapis", "erp"
@@ -53,7 +57,9 @@ public class ExperienceModel : PageModel
         Education.Add(new Experience{
             Place = "Conestoga College",
             Title = "Software Engineering Technology",
-            Description = "Software Engineering Technology program at Conestoga offered me a comprehensive, hands-on curriculum covering diverse technologies, from web development to cybersecurity, the co-op enabled me as a Software Developer equipping me for a thriving career across various fields like Mobile Applications, Embedded Systems, Internet of Things, and Big Data",
+            StartDate = new DateTime(2020, 1, 1),
+            EndDate = new DateTime(2023, 4, 29),
+            Description = "Software Engineering Technology program at Conestoga offers a comprehensive, hands-on curriculum covering diverse technologies, from web development to cybersecurity.",
             Tags = new string[] {
                 "gpa-3.5", "capstone-awarded"
                 },
