@@ -4,26 +4,25 @@
 	ViewData["Title"] = "About";
 }
 
-<div id="wrap_about" class="flex flex-col md:flex-row p-4">
-    <div id="words" class="font-[Gratina] text-2xl sm:text-4xl md:6xl">
-        <div>
-            <p>Recent graduate with <a class="text-secondary" asp-area="" asp-page="/Experience">work experience</a>.</p>
-        </div>
-        <br/>
-        <div>
-            <p>Excels at <span class="text-primary">creating</span> user experiences and <span class="text-secondary">working</span> with people that love achieving goals.</p>
-        </div>
-        <br/>
-        <div>
-            <p>Thrives on building <span class="text-primary">things</span>,</p>
-            <p><span class="text-primary">things</span> that <span class="text-secondary">matter</span>.</p>
-        </div>
+<div class="flex flex-col md:flex-row sm:m-12 justify-center">
+    <div id="wrap_about" class="flex flex-col md:flex-row p-4 justify-center">
+        <div id="words" class="font-[Gratina] text-2xl sm:text-4xl md:text-7xl h-full max-w-4xl">
+            <div>
+                <p>Recent graduate with <a class="text-secondary" asp-area="" asp-page="/Experience">work experience</a>.</p>
+            </div>
+            <br/>
+            <div>
+                <p>Excels at <span class="text-primary">creating</span> user experiences and <span class="text-secondary">working</span> with people that love achieving goals.</p>
+            </div>
+            <br/>
+            <div>
+                <p>Thrives on building <span class="text-primary">things</span>,</p>
+                <p><span class="text-primary">things</span> that <span class="text-secondary">matter</span>.</p>
+            </div>
+        </div> 
     </div>
-            
-</div>
 
-@section Scripts {
-		@* <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-		<script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
-		<script defer="defer" src="@Url.Content("~/js/animation.js")"></script> *@
-}
+    <div class="self-center min-w-[30rem] min-h-[30rem] hidden sm:block h-72">
+        <partial name="_Filipe" class="flex-1" />
+    </div>
+</div>
