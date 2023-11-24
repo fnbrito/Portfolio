@@ -12,14 +12,14 @@
     <link rel="stylesheet" href="@Url.Content("~/css/site.css")" asp-append-version="true" />
 </head>
 
-<body class="flex flex-col bg-primary-50 min-h-screen m-0 p-0"> @* overflow-hidden*@
+<body class="flex flex-col min-h-screen bg-primary-50 m-0 p-0"> 
     @* Header *@
-    <header class="z-0">
-        <nav id="header" class="w-full h-16 md:px-8">
-            @* <div id="progress" class="h-1 z-20 top-0" style="background:linear-gradient(to right, #000000 var(--scroll), transparent 0);"></div> *@
+    <header class="z-10">
+        <nav id="header" class="w-full h-16 transition-colors fixed">
+            <div id="progress" class="h-1 z-20 top-0 opacity-0" style="background:linear-gradient(to right, #000000 var(--scroll), transparent 0);"></div>
             <div class="w-full md:max-w-4xl mx-auto px-8 py-4 flex flex-wrap justify-between place-content-center place-items-center">
                 @* Home link *@
-                <a class="text-3xl translate-y-0.5 md:translate-y-0 md:self-center transition ease-in duration-200 font-[Gratina] text-gray-900 hover:text-primary no-underline hover:no-underline" href="/">
+                <a class="text-2xl sm:text-3xl translate-y-0.5 md:translate-y-0 md:self-center transition ease-in duration-200 font-[Gratina] text-gray-900 hover:text-primary no-underline hover:no-underline" href="/">
                     Filipe Brito
                 </a>
 
@@ -33,8 +33,8 @@
                 </div>
 
                 @* Links *@
-                <div id="nav-content" class="transition -translate-y-60 md:translate-y-0 w-full flex-grow z-20 md:bg-transparent md:flex md:items-center md:w-auto mt-2 md:mt-0 bg-grey-200">
-                    <ul class="list-none md:flex justify-end flex-1 items-center">
+                <div id="nav-content" class="transition -translate-y-60 md:translate-y-0 w-full flex-grow z-20 md:flex md:items-center md:w-auto ">
+                    <ul class="bg-primary-50 bg-opacity-95 rounded-md list-none md:flex justify-end flex-1 items-center">
                         <li class="mr-3">
                             <a class="inline-block text-gray-600 no-underline hover:text-black hover:text-underline py-2 px-4" asp-area="" asp-page="/About">.about()</a>
                         </li>
@@ -49,18 +49,20 @@
                         </li>
                     </ul>
                 </div>
-
             </div>
         </nav>
     </header>
+    <div id="blank-space" class="h-16 w-full"></div>
+
 
     @* Main *@
-    <main class="flex-1 flex flex-col z-0" role="main">
+    <main class="flex-1 z-0 flex flex-col h-full" role="main">
         @RenderBody()
     </main>
 
+
     @* Footer *@
-    <footer class="bg-transparent h-10 border-t border-gray-400 z-10">
+    <footer class="bg-primary-50 opacity-40 h-10 border-t border-gray-400 z-10">
         <div class="max-w-4xl py-2 px-8 box-border">
             <div>
                 <p>&copy; @DateTime.Now.Year - <a asp-area="" asp-page="/Index">Filipe Brito</a></p>
@@ -68,11 +70,15 @@
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+
+
+    <script src="@Url.Content("~/lib/jquery/dist/jquery.min.js")"></script>
+    <script src="@Url.Content("~/js/site.js")" asp-append-version="true"></script>
     <script>
-        @* /* Progress bar */
-        //Source: https://alligator.io/js/progress-bar-javascript-css-variables/
+        /* Progress bar */
+        //Source: https://alligator.io/js/progress-bar-javascript-css-variables/ (adapted)
         var h = document.documentElement,
             b = document.body,
             st = 'scrollTop',
@@ -93,25 +99,29 @@
             scrollpos = window.scrollY;
 
             if (scrollpos > 10) {
+                progress.classList.remove("opacity-0");
                 header.classList.add("bg-white");
                 header.classList.add("shadow");
-                navcontent.classList.remove("bg-gray-100");
                 navcontent.classList.add("bg-white");
             } else {
+                progress.classList.add("opacity-0");
                 header.classList.remove("bg-white");
                 header.classList.remove("shadow");
                 navcontent.classList.remove("bg-white");
-                navcontent.classList.add("bg-gray-100");
-
             }
 
-        }); *@
+        });
 
 
         function toggleMenu() {
             document.getElementById("nav-content").classList.toggle("-translate-y-60");
             document.getElementById("header").classList.toggle("h-56");
         }
+
+        @* function dismissMenu() {
+            document.getElementById("nav-content").classList.add("-translate-y-60");
+            document.getElementById("header").classList.remove("h-56");
+        } *@
 
         //Javascript to toggle the menu
         document.getElementById('nav-toggle').onclick = toggleMenu; 
@@ -121,13 +131,11 @@
             if (window.innerWidth > 767 && !isBig) {
                 document.getElementById("nav-content").classList.remove("-translate-y-60");
                 document.getElementById("header").classList.remove("h-56");
-                document.getElementById("nav-content").classList.add("hidden");
                 $(window).trigger('windowWidthChanged');
                 isBig = true;
             } if (window.innerWidth < 767 && isBig) {
                 document.getElementById("nav-content").classList.add("hidden");
                 document.getElementById("nav-content").classList.add("-translate-y-60");
-                document.getElementById("nav-content").classList.remove("hidden");
                 $(window).trigger('windowWidthChanged');
                 isBig = false;
             }

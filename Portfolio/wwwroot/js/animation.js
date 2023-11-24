@@ -4,8 +4,8 @@
     ).matches;
     if (!safeToAnimate) return;
   
-    // Get the elements that we need
-    const dom = {
+    // Main container for the SVG
+    const svg = {
       face: document.querySelector("#face"),
       mark: document.querySelector("#mark"),
       eye: document.querySelectorAll("#eyes"),
@@ -24,7 +24,7 @@
     let storedXPosition;
     let storedYPosition;
   
-    // Set up our coordinate mapping with GSAP utils!
+    // Setting up coordinates/maps
     let mapWidth;
     let mapHeight;
     function setMaps() {
@@ -40,41 +40,18 @@
       if (storedXPosition === xPosition && storedYPosition === yPosition) return;
       x = xPosition;
       y = yPosition;
-  
-      gsap.to(dom.face, {
-        yPercent: y / 30,
-        xPercent: x / 30,
-      });
-      gsap.to(dom.mark, {
-        yPercent: y / 15,
-        xPercent: x / 3,
-      });
-      gsap.to(dom.eye, {
-        yPercent: y / 3,
-        xPercent: x / 5,
-      });
-      gsap.to(dom.innerFace, {
-        yPercent: y / 6,
-        xPercent: x / 6,
-      });
-      gsap.to(dom.hairFront, {
-        yPercent: y / 10,
-        xPercent: x / 22,
-      });
-      gsap.to(dom.hairBack, {
-        yPercent: (y / 20) * -1,
-        xPercent: (x / 20) * -1,
-      });
-      gsap.to(dom.ear, {
-        yPercent: (y / 3) * -1,
-        xPercent: (x / 15) * -0.4,
-      });
-      gsap.to([dom.eyebrowLeft, dom.eyebrowRight], {
-        yPercent: y * 2.5,
-      });
-      gsap.to(dom.shadow, {
-        yPercent: y / 10,
-      });
+      
+      const { face, mark, eye, innerFace, hairFront, hairBack, ear, eyebrowLeft, eyebrowRight, shadow } = svg;
+
+      gsap.to(face, {yPercent: y / 30, xPercent: x / 30,});
+      gsap.to(mark, {yPercent: y / 15, xPercent: x / 3,});
+      gsap.to(eye, {yPercent: y / 3, xPercent: x / 5,});
+      gsap.to(innerFace, {yPercent: y / 6, xPercent: x / 6,});
+      gsap.to(hairFront, {yPercent: y / 10, xPercent: x / 22,});
+      gsap.to(hairBack, {yPercent: (y / 20) * -1, xPercent: (x / 20) * -1,});
+      gsap.to(ear, {yPercent: (y / 3) * -1, xPercent: (x / 15) * -0.4,});
+      gsap.to([eyebrowLeft, eyebrowRight], {yPercent: y * 2.5, });
+      gsap.to(shadow, {yPercent: y / 10,});
   
       // update the stored positions with the current positions
       storedXPosition = xPosition;
@@ -111,29 +88,6 @@
       opacity: 1 })
       .to({}, {duration: 0.5});
 
-    // const background = gsap.timeline({
-    //   defaults: {
-    //     repeat: -1,
-    //     delay: 0,
-    //     duration: 20,
-    //     ease: "none"
-    //   }})
-    //   .paused(true) // remove this to start
-    //   .to("#bg-clip", {
-    //     transformOrigin: "50% 50%",
-    //     rotate: 180});
-
-    // const backgroundGradient = gsap.timeline({
-    //   defaults: {
-    //     repeat: -1,
-    //     delay: 0,
-    //     duration: 5,
-    //     ease: "none"
-    //   }})
-    //   .to("#bg-gradient", {
-    //     cx: 1024,
-    //     cy: 768,
-    //     r: 45});
 
     function isBigScreen() {
       return window.innerWidth >= 767;
@@ -158,34 +112,20 @@
       }
     }
 
-    function handleEyebrowEvents() {
-      $(".title")
-        .mouseenter(() => {
-          console.log(xPosition);
-          if (xPosition < 0) {
-            gsap.to(dom.eyebrowRight, {
-              y: -2,
-              transformOrigin: "100% 0%",
-              rotate: 10
-          });
-          } else {
-            gsap.to(dom.eyebrowLeft, {
-              y: -2,
-              transformOrigin: "0% 0%",
-              rotate: -10
-          });
-        }})
-        .mouseleave(() => {
-          gsap.to([dom.eyebrowLeft, dom.eyebrowRight], {
-            y: 0,
-            rotate: 0
-        },);
-      })
-    }
+    // function handleEyebrowEvents() {
+    //   $(".title").mouseenter(() => {
+    //     const [eyebrow, origin, rotate] = xPosition < 0
+    //       ? [svg.eyebrowRight, "100% 0%", 10]
+    //       : [svg.eyebrowLeft, "0% 0%", -10];
+    //     gsap.to(eyebrow, { y: -2, transformOrigin: origin, rotate });
+    //   }).mouseleave(() => {
+    //     gsap.to([svg.eyebrowLeft, svg.eyebrowRight], { y: 0, rotate: 0 });
+    //   });
+    // }
     
     $(window).on("windowWidthChanged", handleSmileEvents);
     handleSmileEvents();
-    handleEyebrowEvents();
+    // handleEyebrowEvents();
   
   })();
   
