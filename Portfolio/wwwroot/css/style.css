@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Gratina';
+  src: url('../fonts/Gratina.otf') format('opentype');
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
