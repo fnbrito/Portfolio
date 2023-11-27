@@ -1,80 +1,48 @@
 ﻿@model Portfolio.Shared.Models.Experience
+@{
+    var startDate = @Model.StartDate.ToString("MMMM yyyy");
+    var endDate = @Model.EndDate.ToString("MMMM yyyy");
+}
 
-
-
-<div class="flex flex-col m-6 box-border w-[22rem] from-secondary to-primary bg-gradient-to-t rounded-2xl" style="">
+<div class="cursor-pointer flex flex-col m-6 box-border w-[23rem] from-secondary to-primary bg-gradient-to-t rounded-2xl" style="">
     <div class="rounded-3xl">
         <div class="img rounded-t-2xl p-6">
             <img class="mx-auto invert" width="150rem" height="auto" src="@Url.Content("~/images/" + @Model.ImageUrl)" alt="@Model.ImageDescription" />            
         </div>
         
-        <div class="texts p-6 bg-gray-100" style="">
-            <h2 class="h2 mt-0 text-xl">@Model.Title</h2>
-            @{
-                var startDate = @Model.StartDate.ToString("MMMM yyyy");
-                var endDate = @Model.EndDate.ToString("MMMM yyyy");
-            }
-            <div class="flex flex-row place-content-between">
-                <p class="p font-light text-left">@Model.Place</span>
-                <p class="p font-light text-right">@Model.Location</span>
+        <div class="bg-gray-100 bg-opacity-50 py-4 px-6 flex flex-col">
+            <div class="texts" style="">
+                <h2 class="h2 text-xl font-bold">@Model.Title</h2>
+                <div class="flex flex-row place-content-between">
+                    <p class="p font-light text-left"><a href="@Model.Url">@Model.Place</a></p>
+                    <p class="p font-light text-right">@Model.Location</p>
+                </div>
+                <span class="date text-gray-700 text-xs">@startDate to @endDate</span>
             </div>
-            <span class="date text-gray-700 text-xs">@startDate to @endDate</span>
+
+            <div class="description flex-1 min-h-[10rem]" style="">
+                @Model.Description
+            </div>
+            
+            <div class="bullets" style="">
+                @foreach (var bullet in Model.BulletPoints) {
+                    <div class="bullet hidden">
+                        <p class="p text-gray-700 text-sm font-light">@bullet</p>
+                    </div>
+                    }
+            </div>
         </div>
 
-        @* truncate hover:text-clip overflow-hidden whitespace-nowrap hover:whitespace-normal overflow-ellipsis *@
-        <div class="description p-6 h-32 bg-gray-100" style="">
-            @Model.Description
-        </div>
-        
-        @* <div class="relative h-24">
-            <p class="overflow-y-auto">@Model.Description</p>
-            <div class="absolute bottom-0 w-full h-10 bg-gradient-to-t from-white"></div>
-        </div> *@
-
-        <div class="bullets p-6 bg-gray-100" style="">
-            @foreach (var bullet in Model.BulletPoints) {
-                <div class="bullet hidden">
-                    <p class="p text-gray-700 text-sm font-light">@bullet</p>
-                </div>    
-                }
-        </div>
-        <div class="tags p-6 text-center" style="">
+        <div class="tags text-center flex">
             @foreach (var tag in Model.Tags)
             {
-                <span class="tag bg-secondary-300 rounded-full px-2 py-1 text-xs text-gray-700 mb-2">@tag</span>
+                string className = "tag py-3 block flex-1 text-sm font-bold border-secondary-200 text-white border-l-2";
+                if (Model.Tags.First()==tag)
+                {
+                    className = className.Remove(className.Length - "border-l-2".Length);
+                }
+                <span class="@className">@tag</span>
             }
         </div>
     </div>
 </div>
-
-
-@* 
-<div class="card transition-transform w-64 p-8 m-4 flex-shrink-0 flex flex-col sm:rounded-3xl sm:shadow-md sm:hover:bg-[#F4F4F4] smm:hover:shadow-2xl">
-
-    <div class="self-center">
-        <img class="mx-auto" width="200rem" height="auto" src="@Url.Content("~/images/" + @Model.ImageUrl)" alt="@Model.ImageDescription" />
-    </div>
-
-    <div class="">
-        <h2 class="text-lg font-bold mb-1">@Model.Title</h2>
-        <a href="@Model.Url"><h3 class="text-gray-700 text-sm text-right">@@ @Model.Place</h3></a>
-    </div>
-
-    <div class="self-center">
-        @foreach (var tag in Model.Tags)
-        {
-            <span class="more bg-gray-200 rounded-full px-2 py-1 text-xs text-gray-700 mb-2">@tag</span>
-        }
-    </div>
-
-    <div class="card-text-hide w-full hidden">
-        <h4 class="text-md font-semibold">@Model.Description</h4>
-        <ul class="text-sm list-disc list-inside">
-            @foreach (var point in Model.BulletPoints)
-            {
-                <li>@point</li>
-            }
-        </ul>
-    </div>
-
-</div> *@
