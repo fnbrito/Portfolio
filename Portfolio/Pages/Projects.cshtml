@@ -4,18 +4,9 @@
     ViewData["Title"] = "Projects";
 }
 
-<div class="flex-1 flex flex-col">
+<div class="flex-1 flex flex-col m-6 place-items-center">
     @foreach (var project in Model.Projects)
     {
-        <div class="bg-blue-300 rounded-xl flex">
-            <div>
-                <h1 class="text-xl font-bold">@project.Name</h1>
-                <p>@project.Description</p>
-                <a href="@project.SourceUrl">@project.Source</a>
-            </div>
-            <div>
-                <img src="@project.ImageUrl" alt="@project.ImageDescription">
-            </div>
-        </div>
+        <partial name="_ProjectCard" model="project" />
     }
 </div>

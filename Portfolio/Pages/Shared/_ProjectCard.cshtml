@@ -2,3 +2,15 @@
 @{
 }
 
+<div class="bg-blue-300 rounded-xl flex justify-around p-4 gap-4 w-fit h-80 bg-opacity-25 from-secondary to-primary bg-gradient-to-tr ">
+    <div class="flex flex-col w-80 gap-2 bg-white rounded-lg bg-opacity-25 p-4">
+        <h1 class="text-center text-3xl font-bold">@Model.Name</h1>
+        <p class="font-medium text-xl">@Model.Description</p>
+        <p>@Model.LongDescription</p>
+    </div>
+
+    <div class="flex flex-col justify-center gap-2">
+        <a href="@Model.Url" target="_"><img class="border-primary border-4 w-fit h-fit" src="@Url.Content("~/images/" + @Model.ImageUrl)" alt="@Model.ImageDescription"></a>
+        <a href="@Model.SourceUrl" target="_" class="self-center"><img src="https://img.shields.io/badge/Source%20on%20'@Model.Source'-grey?style=for-the-badge&logo=@Model.Source"/></a>
+    </div>
+</div>
