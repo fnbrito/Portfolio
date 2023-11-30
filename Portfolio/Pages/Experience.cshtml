@@ -1,14 +1,15 @@
 ﻿@page
+@* @using Portfolio.Shared.Models; *@
 @model ExperienceModel
 @{
     ViewData["Title"] = "Experience";
 }
 
-<div class="flex-1 flex my-4">
-    <div class="flex-auto flex gap-4 justify-center">
+<div class="flex-1 flex m-8">
+    <div class="flex-auto flex flex-row gap-4 justify-center">
         <div class="">
-            <h1 class="text-2xl font-bold border-b-4 border-black ">Work Experience</h1>
-            <div class="flex flex-wrap justify-center sm:justify-normal">
+            <h1 class="text-2xl font-bold p-2">Work Experience</h1>
+            <div class="flex flex-wrap justify-center sm:justify-normal border-dashed border-t-4 border-l-4">
                 @foreach (var job in Model.Jobs)
                 {
                     <partial name="_ExperienceCard" model="@job"/>
@@ -16,8 +17,8 @@
             </div>
         </div>
         <div class="">
-            <h1 class=" text-2xl font-bold border-b-4 border-black">Education</h1>
-            <div class="flex flex-wrap justify-center sm:justify-normal">
+            <h1 class=" text-2xl font-bold p-2">Education</h1>
+            <div class="flex flex-wrap justify-center sm:justify-normal border-dashed border-t-4 border-l-4">
                 @foreach (var program in Model.Education)
                 {
                     <partial name="_ExperienceCard" model="@program"/>
@@ -25,5 +26,6 @@
             </div>
         </div>
     </div>
-
+    @* <partial name="_Filipe" model="@new Character()"/> *@
 </div>
+

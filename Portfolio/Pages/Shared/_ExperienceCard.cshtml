@@ -3,8 +3,9 @@
     var startDate = @Model.StartDate.ToString("MMMM yyyy");
     var endDate = @Model.EndDate.ToString("MMMM yyyy");
 }
+<script src="~/js/Experience.js"></script>
 
-<div class="cursor-pointer flex flex-col m-6 box-border w-[23rem] from-secondary to-primary bg-gradient-to-t rounded-2xl" style="">
+<div class="group cursor-pointer flex flex-col m-4 box-border w-[30rem] h-fit from-secondary to-primary bg-gradient-to-t rounded-2xl" onclick="toggleCard(this)">
     <div class="rounded-3xl">
         <div class="img rounded-t-2xl p-6">
             <img class="mx-auto invert" width="150rem" height="auto" src="@Url.Content("~/images/" + @Model.ImageUrl)" alt="@Model.ImageDescription" />            
@@ -12,7 +13,7 @@
         
         <div class="bg-gray-100 bg-opacity-50 py-4 px-6 flex flex-col">
             <div class="texts" style="">
-                <h2 class="h2 text-xl font-bold">@Model.Title</h2>
+                <h2 class="h2 text-lg font-bold">@Model.Title</h2>
                 <div class="flex flex-row place-content-between">
                     <p class="p font-light text-left"><a href="@Model.Url">@Model.Place</a></p>
                     <p class="p font-light text-right">@Model.Location</p>
@@ -20,14 +21,14 @@
                 <span class="date text-gray-700 text-xs">@startDate to @endDate</span>
             </div>
 
-            <div class="description flex-1 min-h-[10rem]" style="">
+            <div id="description" class="description flex-1 min-h-[12rem] text-lg " style="">
                 @Model.Description
             </div>
             
-            <div class="bullets" style="">
+            <div id="bullets" class="bullets hidden " style="">
                 @foreach (var bullet in Model.BulletPoints) {
-                    <div class="bullet hidden">
-                        <p class="p text-gray-700 text-sm font-light">@bullet</p>
+                    <div class="bullet my-2 bg-white bg-opacity-20 rounded-lg p-2">
+                        <p class="p text-black text-md font-light">@bullet</p>
                     </div>
                     }
             </div>
@@ -46,3 +47,6 @@
         </div>
     </div>
 </div>
+
+
+
